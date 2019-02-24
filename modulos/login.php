@@ -1,37 +1,38 @@
 <?php
+if(isset($_SESSION['id_cliente'])){
+	redir("./");
+}
 	
 if(isset($enviar)){
 	$username = clear($username);
 	$password = clear($password);
 
-	$q = $mysqli->query("SELECT * FROM admins WHERE username = '$username' AND password = '$password'");
+	$q = $mysqli->query("SELECT * FROM clientes WHERE username = '$username' AND password = '$password'");
 
 	if(mysqli_num_rows($q)>0){
 		$r = mysqli_fetch_array($q);
-		$_SESSION['id'] = $r['id'];
-		redir("?p=admin");
+		$_SESSION['id_cliente'] = $r['id'];
+		if(isset($return)){
+			redir("?p=".$return);
+		}else{
+			redir("./");
+		}
 	}else{
 		alert("Los datos no son validos");
-		redir("?p=admin");
+		redir("?p=login");
 	}
 
 
 }
+	?>
 
-if(isset($_SESSION['id'])){ // si hay una sesion iniciada
-	?>
-	<a href="?p=agregar_producto">
-		<button class="btn btn-primary"><i class="fa fa-plus-circle"></i> Agregar Productos</button>
-	</a>
-	<?php
-}else{ // si no hay una sesion iniciada
-	?>
+
 	<center>
 		<form method="post" action="">
 			<div class="centrar_login">
-				<label><h2><i class="fa fa-key"></i> Iniciar Sesión Como Administrador</h2></label>
+				<label><h2><i class="fa fa-key"></i> Iniciar Sesión</h2></label>
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Usuario" name="username"/>
+					<input type="text" autocomplete="off" class="form-control" placeholder="Usuario" name="username"/>
 				</div>
 
 				<div class="form-group">
@@ -44,6 +45,3 @@ if(isset($_SESSION['id'])){ // si hay una sesion iniciada
 			</div>
 		</form>
 	</center>
-	<?php
-}
-?>

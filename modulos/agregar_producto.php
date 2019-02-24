@@ -12,7 +12,7 @@ if(isset($enviar)){
 		move_uploaded_file($_FILES['imagen']['tmp_name'], "productos/".$imagen);
 	}
 
-	mysql_query("INSERT INTO productos (name,price,imagen) VALUES ('$name','$price','$imagen')");
+	$mysqli->query("INSERT INTO productos (name,price,imagen) VALUES ('$name','$price','$imagen')");
 	alert("Producto agregado");
 	redir("?p=agregar_producto");
 }
