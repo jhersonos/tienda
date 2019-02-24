@@ -1,7 +1,11 @@
 <?php
+
+$host_mysql = "localhost";
+$user_mysql = "root";
+$pass_mysql = "";
+$db_mysql = "tienda";
+$mysqli = mysqli_connect($host_mysql,$user_mysql,$pass_mysql,$db_mysql);
 	
-	mysql_connect($host_mysql,$user_mysql,$pass_mysql) or die ("Error al conectar al servidor mysql");
-	mysql_select_db($db_mysql) or die("Error conectando a la base de datos");
 
 function clear($var){
 	htmlspecialchars($var);
@@ -30,5 +34,35 @@ function alert($var){
 		alert("<?=$var?>");
 	</script>
 	<?php
+}
+
+function check_user($url){
+
+	if(!isset($_SESSION['id_cliente'])){
+		redir("?p=login&return=$url");
+	}else{
+
+	}
+
+}
+
+function nombre_cliente($id_cliente){
+	$mysqli = connect();
+
+	$q = $mysqli->query("SELECT * FROM clientes WHERE id = '$id_cliente'");
+	$r = mysqli_fetch_array($q);
+	return $r['name'];
+}
+
+function connect(){
+	$host_mysql = "localhost";
+	$user_mysql = "root";
+	$pass_mysql = "";
+	$db_mysql = "tienda";
+
+
+ 	$mysqli = mysqli_connect($host_mysql,$user_mysql,$pass_mysql,$db_mysql);
+
+	return $mysqli;
 }
 ?>
