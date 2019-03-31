@@ -45,12 +45,13 @@ if(isset($agregar) && isset($cant)){
 }
 
 if(isset($cat)){
-	$q = $mysqli->query("SELECT * FROM productos WHERE id_categoria = '$cat' ORDER BY id DESC");
+	$q = $mysqli->query("SELECT * FROM productos WHERE id_categoria = '$cat' AND oferta>0 ORDER BY id DESC");
 }else{
-	$q = $mysqli->query("SELECT * FROM productos ORDER BY id DESC");
+	$q = $mysqli->query("SELECT * FROM productos WHERE oferta>0 ORDER BY id DESC");
 }
 while($r=mysqli_fetch_array($q)){
 	$preciototal = 0;
+
 			if($r['oferta']>0){
 				if(strlen($r['oferta'])==1){
 					$desc = "0.0".$r['oferta'];
@@ -62,22 +63,12 @@ while($r=mysqli_fetch_array($q)){
 			}else{
 				$preciototal = $r['price'];
 			}
+
 	?>
 		<div class="producto">
 			<div class="name_producto"><?=$r['name']?></div>
-			<div><img class="img_producto" src="productos/<?=$r['imagen']?>"/></div>
-			<?php
-			if($r['oferta']>0){
-				?>
-				<del><?=$r['price']?> <?=$divisa?></del> <span class="precio"> <?=$preciototal?> <?=$divisa?> </span>
-				<?php
-			}else{
-				?>
-				<span class="precio"><br><?=$r['price']?> <?=$divisa?></span>
-				<?php
-			}
-			?>
-			
+			<div><img class="img_producto" src="productos/<?=$r['imagen']?>"/></div><br>
+			<del><?=$r['price']?> <?=$divisa?></del> <span class="precio"> <?=$preciototal?> <?=$divisa?> </span>
 			<button class="btn btn-warning pull-right" onclick="agregar_carro('<?=$r['id']?>');"><i class="fa fa-shopping-cart"></i></button>
 		</div>
 	<?php
@@ -90,13 +81,13 @@ while($r=mysqli_fetch_array($q)){
 		var cant = prompt("¿Que cantidad desea agregar?",1);
 
 		if(cant.length>0){
-			window.location="?p=productos&agregar="+idp+"&cant="+cant;
+			window.location="?p=ofertas&agregar="+idp+"&cant="+cant;
 		}
 	}
 
 	function redir_cat(){
 
-		window.location="?p=productos&cat="+$("#categoria").val();
+		window.location="?p=ofertas&cat="+$("#categoria").val();
 
 	}
 
