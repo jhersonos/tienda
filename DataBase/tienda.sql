@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-02-2019 a las 21:12:57
+-- Tiempo de generación: 31-03-2019 a las 05:44:14
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -55,6 +55,33 @@ CREATE TABLE `carro` (
   `cant` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `carro`
+--
+
+INSERT INTO `carro` (`id`, `id_cliente`, `id_producto`, `cant`) VALUES
+(1, 1, 5, 1),
+(2, 1, 4, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categorias`
+--
+
+CREATE TABLE `categorias` (
+  `id` int(11) NOT NULL,
+  `categoria` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `categorias`
+--
+
+INSERT INTO `categorias` (`id`, `categoria`) VALUES
+(2, 'Tecnologia'),
+(3, 'Alimentos');
+
 -- --------------------------------------------------------
 
 --
@@ -94,7 +121,7 @@ CREATE TABLE `compra` (
 --
 
 INSERT INTO `compra` (`id`, `id_cliente`, `fecha`, `monto`, `estado`) VALUES
-(3, 1, '2019-02-24 12:39:04', 16400, 0);
+(3, 1, '2019-02-24 12:39:04', 16400, 1);
 
 -- --------------------------------------------------------
 
@@ -106,19 +133,20 @@ CREATE TABLE `productos` (
   `id` int(11) NOT NULL,
   `price` float NOT NULL,
   `imagen` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `id_categoria` int(11) NOT NULL,
+  `oferta` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `price`, `imagen`, `name`) VALUES
-(1, 1000, 'Aceite776.png', 'Aceite'),
-(2, 200, 'Cebolla493.png', 'Cebolla'),
-(3, 1200, 'Gaseosa828.png', 'Gaseosa'),
-(4, 1000, 'Leche581.png', 'Leche'),
-(5, 400, 'Zanahoria838.png', 'Zanahoria');
+INSERT INTO `productos` (`id`, `price`, `imagen`, `name`, `id_categoria`, `oferta`) VALUES
+(1, 1000, 'Aceite776.png', 'Aceite', 3, 0),
+(2, 200, 'Cebolla493.png', 'Cebolla', 3, 0),
+(4, 1000, 'Leche581.png', 'Leche', 3, 50),
+(5, 400, 'Zanahoria838.png', 'Zanahoria', 3, 10);
 
 -- --------------------------------------------------------
 
@@ -162,6 +190,12 @@ ALTER TABLE `carro`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `clientes`
 --
 ALTER TABLE `clientes`
@@ -199,7 +233,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT de la tabla `carro`
 --
 ALTER TABLE `carro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `categorias`
+--
+ALTER TABLE `categorias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
