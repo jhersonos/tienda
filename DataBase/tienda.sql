@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-03-2019 a las 05:44:14
+-- Tiempo de generación: 13-04-2019 a las 03:22:09
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -55,14 +55,6 @@ CREATE TABLE `carro` (
   `cant` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `carro`
---
-
-INSERT INTO `carro` (`id`, `id_cliente`, `id_producto`, `cant`) VALUES
-(1, 1, 5, 1),
-(2, 1, 4, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -80,7 +72,8 @@ CREATE TABLE `categorias` (
 
 INSERT INTO `categorias` (`id`, `categoria`) VALUES
 (2, 'Tecnologia'),
-(3, 'Alimentos');
+(3, 'Alimentos'),
+(4, 'En Linea');
 
 -- --------------------------------------------------------
 
@@ -121,7 +114,8 @@ CREATE TABLE `compra` (
 --
 
 INSERT INTO `compra` (`id`, `id_cliente`, `fecha`, `monto`, `estado`) VALUES
-(3, 1, '2019-02-24 12:39:04', 16400, 1);
+(3, 1, '2019-02-24 12:39:04', 16400, 1),
+(4, 1, '2019-04-12 20:03:40', 1360, 0);
 
 -- --------------------------------------------------------
 
@@ -135,18 +129,20 @@ CREATE TABLE `productos` (
   `imagen` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `id_categoria` int(11) NOT NULL,
-  `oferta` int(11) NOT NULL
+  `oferta` int(11) NOT NULL,
+  `descargable` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `price`, `imagen`, `name`, `id_categoria`, `oferta`) VALUES
-(1, 1000, 'Aceite776.png', 'Aceite', 3, 0),
-(2, 200, 'Cebolla493.png', 'Cebolla', 3, 0),
-(4, 1000, 'Leche581.png', 'Leche', 3, 50),
-(5, 400, 'Zanahoria838.png', 'Zanahoria', 3, 10);
+INSERT INTO `productos` (`id`, `price`, `imagen`, `name`, `id_categoria`, `oferta`, `descargable`) VALUES
+(1, 1000, 'Aceite776.png', 'Aceite', 3, 0, ''),
+(2, 200, 'Cebolla493.png', 'Cebolla', 3, 0, ''),
+(4, 1000, 'Leche581.png', 'Leche', 3, 50, ''),
+(5, 400, 'Zanahoria838.png', 'Zanahoria', 3, 10, ''),
+(7, 1000, 'Secreto218.png', 'Secreto', 0, 0, '215secreto del mundo.txt');
 
 -- --------------------------------------------------------
 
@@ -171,7 +167,9 @@ INSERT INTO `productos_compra` (`id`, `id_compra`, `id_producto`, `cantidad`, `m
 (2, 3, 4, 4, 1000),
 (3, 3, 3, 4, 1200),
 (4, 3, 2, 4, 200),
-(5, 3, 1, 4, 1000);
+(5, 3, 1, 4, 1000),
+(6, 4, 5, 1, 400),
+(7, 4, 7, 1, 1000);
 
 --
 -- Índices para tablas volcadas
@@ -233,13 +231,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT de la tabla `carro`
 --
 ALTER TABLE `carro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
@@ -251,19 +249,19 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `productos_compra`
 --
 ALTER TABLE `productos_compra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
