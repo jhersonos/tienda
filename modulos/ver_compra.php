@@ -1,7 +1,10 @@
 <?php
-check_admin();
-
+check_user('ver_compra');
 $id = clear($id);
+
+$s = $mysqli->query("SELECT * FROM compra WHERE id = '$id' AND id_cliente = '".$_SESSION['id']."'");
+
+if(mysqli_num_rows($s)>0){
 
 $s = $mysqli->query("SELECT * FROM compra WHERE id = '$id'");
 $r = mysqli_fetch_array($s);
@@ -12,7 +15,7 @@ $rc = mysqli_fetch_array($sc);
 $nombre = $rc['name'];
 
 ?>
-<h1>Viendo compra de <span style="color:#08f"><?=$nombre?></span></h1><br>
+<h1>Viendo compra #<span style="color:#08f"><?=$r['id']?></span></h1><br>
 
 Fecha: <?=fecha($r['fecha'])?><br>
 Monto: <?=number_format($r['monto'])?> <?=$divisa?><br>
@@ -24,6 +27,7 @@ Estado: <?=estado($r['estado'])?><br>
 		<th>Cantidad</th>
 		<th>Monto</th>
 		<th>Monto Total</th>
+		<th>Acciones</th>
 	</tr>
 	<?php
 		$sp = $mysqli->query("SELECT * FROM productos_compra WHERE id_compra = '$id'");
@@ -41,8 +45,26 @@ Estado: <?=estado($r['estado'])?><br>
 					<td><?=$rp['cantidad']?></td>
 					<td><?=$rp['monto']?></td>
 					<td><?=$montototal?></td>
+					<td>
+						<?php
+						if($rpro['descargable']!=""){
+							?>
+							<a href="descargable/<?=$rpro['descargable']?>" download><i class="fa fa-download"></i></a>
+							<?php
+						}else{
+							echo "--";
+						}
+						?>
+					</td>
 				</tr>
 			<?php
 		}
 	?>
 </table>
+
+<?php
+
+}else{
+	alert("Ha ocurrido un error");
+	redir("?p=miscompras");
+}

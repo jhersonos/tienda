@@ -1,18 +1,7 @@
-<select id="categoria" onchange="redir_cat()" class="form-control">
-	<option value="">Seleccione una categoria para filtrar</option>
-	<?php
-	$cats = $mysqli->query("SELECT * FROM categorias ORDER BY categoria ASC");
-	while($rcat = mysqli_fetch_array($cats)){
-		?>
-		<option value="<?=$rcat['id']?>"><?=$rcat['categoria']?></option>
-		<?php
-	}
-	?>
-</select>
-
-
 <?php
 check_user("productos");
+
+
 
 if(isset($cat)){
 	$sc = $mysqli->query("SELECT * FROM categorias WHERE id = '$cat'");
@@ -44,11 +33,44 @@ if(isset($agregar) && isset($cant)){
 	redir("?p=productos");
 }
 
-if(isset($cat)){
+if(isset($busq) && isset($cat)){
+	$q = $mysqli->query("SELECT * FROM productos WHERE name like '%$busq%' AND id_categoria = '$cat'");
+}elseif(isset($cat) && !isset($busq)){
 	$q = $mysqli->query("SELECT * FROM productos WHERE id_categoria = '$cat' ORDER BY id DESC");
+}elseif(isset($busq) && !isset($cat)){
+	$q = $mysqli->query("SELECT * FROM productos WHERE name like '%$busq%'");
+}elseif(!isset($busq) && !isset($cat)){
+	$q = $mysqli->query("SELECT * FROM productos ORDER BY id DESC");
 }else{
 	$q = $mysqli->query("SELECT * FROM productos ORDER BY id DESC");
 }
+?>
+	
+	<form method="post" action="">
+		<div class="row">
+			<div class="col-md-5">
+				<div class="form-group">
+					<input type="text" class="form-control" name="busq" placeholder="Coloca el nombre del producto"/>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<select id="categoria" name="cat" class="form-control">
+					<?php
+					$cats = $mysqli->query("SELECT * FROM categorias ORDER BY categoria ASC");
+					while($rcat = mysqli_fetch_array($cats)){
+						?>
+						<option value="<?=$rcat['id']?>"><?=$rcat['categoria']?></option>
+						<?php
+					}
+					?>
+				</select>
+			</div>
+			<div class="col-md-2">
+				<button type="submit" class="btn btn-prmiary" name="buscar"><i class="fa fa-serch"></i> Buscar</button>
+			</div>
+		</div>
+	</form>
+<?php
 while($r=mysqli_fetch_array($q)){
 	$preciototal = 0;
 			if($r['oferta']>0){
@@ -92,12 +114,6 @@ while($r=mysqli_fetch_array($q)){
 		if(cant.length>0){
 			window.location="?p=productos&agregar="+idp+"&cant="+cant;
 		}
-	}
-
-	function redir_cat(){
-
-		window.location="?p=productos&cat="+$("#categoria").val();
-
 	}
 
 </script>
