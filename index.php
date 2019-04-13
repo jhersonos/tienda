@@ -31,7 +31,10 @@ if(!isset($p)){
 		<a href="?p=productos">Productos</a>
 		<a href="?p=ofertas">Ofertas</a>
 		<a href="?p=carrito">Carrito</a>
+		<a href="?p=miscompras">Mis Compras</a>
+		<!--
 		<a href="?p=admin">Administrador</a>
+		-->
 
 		<?php
 			if(isset($_SESSION['id_cliente'])){
