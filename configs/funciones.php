@@ -1,5 +1,6 @@
 <?php
 
+
 $host_mysql = "localhost";
 $user_mysql = "root";
 $pass_mysql = "";
@@ -97,6 +98,18 @@ function estado($id_estado){
 		}
 
 		return $status;
+
+}
+
+function admin_name_connected(){
+	include "config.php";
+	$id = $_SESSION['id'];
+	$mysqli = connect();
+
+	$q = $mysqli->query("SELECT * FROM admins WHERE id = '$id'");
+	$r = mysqli_fetch_array($q);
+
+	return $r['name'];
 
 }
 ?>
