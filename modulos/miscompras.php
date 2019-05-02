@@ -1,6 +1,6 @@
 <?php
 check_user('miscompras');
-$s = $mysqli->query("SELECT * FROM compra WHERE id_cliente = '".$_SESSION['id']."' ORDER BY fecha DESC");
+$s = $mysqli->query("SELECT * FROM compra WHERE id_cliente = '".$_SESSION['id_cliente']."' ORDER BY fecha DESC");
 if(mysqli_num_rows($s)>0){
 	?>
 	<h1>Mis compras</h1>
