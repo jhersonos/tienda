@@ -30,8 +30,18 @@ if(!isset($p)){
 		<a href="?p=principal">Principal</a>
 		<a href="?p=productos">Productos</a>
 		<a href="?p=ofertas">Ofertas</a>
-		<a href="?p=carrito">Carrito</a>
+		<?php
+		if(isset($_SESSION['id_cliente'])){
+		?>
+		<a href="?p=carrito">Mi Carrito</a>
 		<a href="?p=miscompras">Mis Compras</a>
+		<?php
+		}else{
+			?>
+				<a href="?p=registro">Registrate</a>
+			<?php
+		}
+		?>
 		<!--
 		<a href="?p=admin">Administrador</a>
 		-->

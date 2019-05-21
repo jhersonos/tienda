@@ -24,6 +24,14 @@ if(mysqli_num_rows($s)>0){
 				<a href="?p=ver_compra&id=<?=$r['id']?>">
 					<i class="fa fa-eye"></i>
 				</a>
+
+				<?php
+					if(estado($r['estado']) == "Iniciando"){
+						?>
+							&nbsp; &nbsp; <a title="Pagar" href="?p=pagar_compra&id=<?=$r['id']?>"><b>P</b></a>
+						<?php
+					}
+				?>
 			</td>
 		</tr>
 		<?php

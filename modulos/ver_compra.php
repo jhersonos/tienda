@@ -2,7 +2,7 @@
 check_user('ver_compra');
 $id = clear($id);
 
-$s = $mysqli->query("SELECT * FROM compra WHERE id = '$id' AND id_cliente = '".$_SESSION['id']."'");
+$s = $mysqli->query("SELECT * FROM compra WHERE id = '$id' AND id_cliente = '".$_SESSION['id_cliente']."'");
 
 if(mysqli_num_rows($s)>0){
 
@@ -61,6 +61,17 @@ Estado: <?=estado($r['estado'])?><br>
 		}
 	?>
 </table>
+<br>
+<br>
+<?php
+if(estado($r['estado']) == "Iniciando"){
+	?>
+	<a class="btn btn-primary" href="?p=pagar_compra&id=<?=$r['id']?>">
+		Pagar
+	</a>
+	<?php
+}
+?>
 
 <?php
 

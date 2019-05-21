@@ -46,8 +46,14 @@ if(isset($finalizar)){
 	}
 
 	$mysqli->query("DELETE FROM carro WHERE id_cliente = '$id_cliente'");
+
+	$sc = $mysqli->query("SELECT * FROM compra WHERE id_cliente = '$id_cliente' ORDER BY id DESC LIMIT 1");
+	$rc = mysqli_fetch_array($sc);
+
+	$id_compra = $rc['id'];
+
 	alert("Se ha finalizado la compra");
-	redir("./");
+	redir("?p=ver_compra&id=".$id_compra);
 
 }
 ?>
