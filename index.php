@@ -20,14 +20,11 @@ if(!isset($p)){
 	<script type="text/javascript" src="fontawesome/js/all.js"></script>
 	<script type="text/javascript" src="js/jquery.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
-	<title>Tienda Online</title>
+	<title>Golosineria Mari</title>
 </head>
 <body>
-	<div class="header">
-		Tienda Online
-	</div>
 	<div class="menu">
-		<a href="?p=principal">Principal</a>
+		<a href="?p=principal">Inicio</a>
 		<a href="?p=productos">Productos</a>
 		<a href="?p=ofertas">Ofertas</a>
 		<?php
@@ -68,7 +65,7 @@ if(!isset($p)){
 	</div>
 
 	<div class="footer">
-		Copyright AnySlehider &copy; <?=date("Y")?>
+		Copyright  &copy; <?=date("Y")?>
 	</div>
 
 </body>

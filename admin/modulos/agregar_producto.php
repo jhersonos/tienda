@@ -126,7 +126,7 @@ if(isset($eliminar)){
 			$preciototal = 0;
 
 			$cat = $mysqli->query("SELECT * FROM categorias WHERE id = '".$rp['id_categoria']."'");
-
+			//echo "SELECT * FROM categorias WHERE id = '".$rp['id_categoria']."'";
 			if(mysqli_num_rows($cat)>0){
 				$rcat = mysqli_fetch_array($cat);
 				$categoria = $rcat['categoria'];

@@ -27,6 +27,9 @@ if(!isset($_SESSION['id'])){
   <html>
   <head>
     <title>Admin Panel</title>
+    <style>
+      .sidebar-menu>li:nth-child(2){}
+    </style>
   </head>
   <body style="background: #08f;color:#fff">
      <center>
@@ -106,9 +109,9 @@ if(!isset($_SESSION['id'])){
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>TL</span>
+      <span class="logo-mini"><b>A</b></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>TL</span>
+      <span class="logo-lg"><b>Admin</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -376,11 +379,11 @@ if(!isset($_SESSION['id'])){
       <ul class="sidebar-menu">
         <li class="header">MENU</li>
         
-        <li>
+        <!--<li>
           <a href="./">
             <i class="fa fa-th"></i> <span>Principal</span>
           </a>
-        </li>
+        </li>-->
 
         
         <li>
@@ -428,7 +431,7 @@ if(!isset($_SESSION['id'])){
     ?>
 
     <!-- Main content -->
-    <section class="content">
+    <section class="content" style="display:none !important">
       <!-- Small boxes (Stat box) -->
       <div class="row">
         <div class="col-lg-3 col-xs-6">

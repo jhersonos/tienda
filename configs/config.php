@@ -2,5 +2,5 @@
 	@session_start();
 	@extract($_REQUEST);
 
-	$divisa = "USD";
+	$divisa = "PEN";
 ?>

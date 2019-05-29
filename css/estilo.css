@@ -13,7 +13,7 @@ a{
 }
 
 .header{
-	background:#111;
+	background:#f80;
 	color:#fff;
 	padding:30px;
 	text-align: center;
@@ -39,7 +39,7 @@ a{
 }
 
 .cuerpo{
-	background: #eaeaea;
+	background: #fff;
 	padding:30px;
 	min-height:440px;
 }
